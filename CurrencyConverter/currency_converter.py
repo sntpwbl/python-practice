@@ -1,8 +1,3 @@
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
 def print_and_save_operation_history(operation):
     print(operation)
     history = open('./values.txt', 'a')
@@ -14,7 +9,7 @@ def clear_history():
     history.write('')
 
 def show_options():
-    option = int(input(f"{os.environ.get('OPTION')} "))
+    option = int(input("Select one option below:\n[1 - Commit another conversion]\n[2 - Clear history]\n[3 - Stop application]\n"))
     return option
 
 def get_values_and_convert():
@@ -22,9 +17,9 @@ def get_values_and_convert():
     while True:
         try:
             print(f'{'-'*5} BRL CONVERTER [TYPE CTRL + C TO EXIT ANY TIME!] {'-'*5}')
-            value = float(input(f'{os.environ.get('GET_VALUE')} '))
-
-            currency = str(input(f'{os.environ.get('GET_NEW')} ')).upper()
+            
+            value = float(input('Type a value in BRL to be converted: '))
+            currency = str(input('Select a currency which the value will be converted to [USD EUR JPY]: ')).upper()
 
             if currency not in currencies:
                 print('Invalid currency value. Try again.')
@@ -42,7 +37,7 @@ def get_values_and_convert():
                 elif option == 3: break
 
         except ValueError:
-            print(f'{os.environ.get('VALUE_ERROR')} ')
+            print('Invalid value, currency or tax. Try again. Tip: If you want to input a decimal value, use a dot to represent it. ')
         except:
             print('Something went wrong. Stopping application.')
             break
